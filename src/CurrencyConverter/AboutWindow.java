@@ -1,4 +1,4 @@
-package currencyConverter;
+package CurrencyConverter;
 
 import java.awt.Font;
 import javax.swing.border.EmptyBorder;
