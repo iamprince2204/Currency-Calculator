@@ -1,4 +1,4 @@
-package currencyConverter;
+package CurrencyConverter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
