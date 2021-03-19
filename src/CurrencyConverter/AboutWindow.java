@@ -22,34 +22,34 @@ public class AboutWindow extends JFrame {
 	 */
 	private AboutWindow() {
 		setTitle(BUNDLE.getString("AboutWindow.this.title")); //$NON-NLS-1$
-		setBounds(100, 100, 347, 260);
+		setBounds(100, 100, 220, 200);
 		setLocationRelativeTo(null);
 		setResizable( false );
 
 		// Window components
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(1, 1, 1, 1));
 		setContentPane(contentPane);
 
 		// Label "author"
 		JLabel lblAuthor = new JLabel(BUNDLE.getString("AboutWindow.lblAuthor.text")); //$NON-NLS-1$
 		lblAuthor.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAuthor.setBounds(65, 122, 219, 33);
-		lblAuthor.setFont(new Font("Noto Sans", Font.BOLD, 15));
+		lblAuthor.setBounds(0, 80, 200, 40);
+		lblAuthor.setFont(new Font("Noto Sans", Font.BOLD, 13));
 		contentPane.setLayout(null);
 
 		// label "title"
 		JLabel lblTitle = new JLabel("Currency Converter");
-		lblTitle.setBounds(65, 12, 219, 33);
+		lblTitle.setBounds(0, 10, 200, 30);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Noto Sans", Font.BOLD, 15));
 		contentPane.add(lblTitle);
 
 
 		// label "version"
-		JLabel lblVersion = new JLabel("Version 1.0");
+		JLabel lblVersion = new JLabel("Version 2.0");
 		lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVersion.setBounds(65, 45, 219, 33);
+		lblVersion.setBounds(0, 50, 200, 40);
 		contentPane.add(lblVersion);
 		contentPane.add(lblAuthor);
 	}

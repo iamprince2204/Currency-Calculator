@@ -1,5 +1,6 @@
 package CurrencyConverter;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class MainWindow extends JFrame {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("localization.translation"); //$NON-NLS-1$
 	private JPanel contentPane;
 	private JTextField fieldAmount;
+	private JLabel label;
 	private ArrayList<Currency> currencies = Currency.init();
 	
 	/**
@@ -35,7 +38,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		setTitle(BUNDLE.getString("MainWindow.this.title")); //$NON-NLS-1$
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 589, 300);
+		setBounds(100, 100, 350, 300);
 		setLocationRelativeTo(null);
 		setResizable( false );
 		
@@ -83,57 +86,71 @@ public class MainWindow extends JFrame {
 		
 		// Window components
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		// Label "Convert"
 		JLabel lblConvert = new JLabel(BUNDLE.getString("MainWindow.lblConvert.text")); //$NON-NLS-1$
 		lblConvert.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblConvert.setBounds(0, 14, 92, 15);
+		lblConvert.setBounds(0, 15, 60, 15);
 		contentPane.add(lblConvert);
 	
 		// ComboBox of the first currency
 		final JComboBox<String> comboBoxCountry1 = new JComboBox<String>();
-		comboBoxCountry1.setBounds(147, 7, 240, 28);
+		comboBoxCountry1.setBounds(70, 7, 250, 30);
 		populate(comboBoxCountry1, currencies);
 		contentPane.add(comboBoxCountry1);
 		
 		// Label "To"
 		JLabel lblTo = new JLabel(BUNDLE.getString("MainWindow.lblTo.text")); //$NON-NLS-1$
 		lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTo.setBounds(66, 54, 26, 15);
+		lblTo.setBounds(10, 60, 25, 15);
 		contentPane.add(lblTo);
 		
 		// ComboBox of the second currency
 		final JComboBox<String> comboBoxCountry2 = new JComboBox<String>();
-		comboBoxCountry2.setBounds(147, 47, 240, 28);
+		comboBoxCountry2.setBounds(70, 50, 250, 30);
 		populate(comboBoxCountry2, currencies);
 		contentPane.add(comboBoxCountry2);
 		
 		// Label "Amount"
 		final JLabel lblAmount = new JLabel(BUNDLE.getString("MainWindow.lblAmount.text")); //$NON-NLS-1$
 		lblAmount.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAmount.setBounds(23, 108, 69, 15);
+		lblAmount.setBounds(-10, 110, 70, 15);
 		contentPane.add(lblAmount);
 		
 		// Textfield where the user 
-		fieldAmount = new JTextField();
-		fieldAmount.setText("0.00");
-		fieldAmount.setBounds(147, 101, 103, 29);
+		fieldAmount = new JTextField(8);
+		fieldAmount.setBounds(70, 100, 100, 30);
 		contentPane.add(fieldAmount);
-		fieldAmount.setColumns(10);
-		fieldAmount.setDocument(new JTextFieldLimit(8));
+		contentPane.add(label = new JLabel());
+		label.setForeground(Color.red);
+	      setDefaultCloseOperation(EXIT_ON_CLOSE);
+	      setLocationRelativeTo(null);
+		fieldAmount.addKeyListener(new KeyAdapter() {
+	         public void keyPressed(KeyEvent ke) {
+	            String value = fieldAmount.getText();
+	            value.length();
+	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9'|| ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+	               fieldAmount.setEditable(true);
+	               label.setText("");
+	            } else {
+	               fieldAmount.setEditable(false);
+	               label.setText("Enter only numeric digits(0-9)");
+	            }
+	         }
+	      });
      	
 		// Label displaying result of conversion
 		final JLabel lblResult = new JLabel("");
 		lblResult.setHorizontalAlignment(SwingConstants.LEFT);
-		lblResult.setBounds(147, 188, 428, 38);
+		lblResult.setBounds(10, 180, 340, 40);
 		contentPane.add(lblResult);
 		
 		// Button "Convert"
 		JButton btnConvert = new JButton(BUNDLE.getString("MainWindow.btnConvert.text")); //$NON-NLS-1$
-		btnConvert.setBounds(147, 142, 129, 38);
+		btnConvert.setBounds(70, 140, 130, 40);
 		btnConvert.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent arg0) {
@@ -187,8 +204,8 @@ public class MainWindow extends JFrame {
 			}
 		}
 		
-		// Find exchange value and call convert() to calcul the new price
-		if (shortNameCurrency2 != null) {
+		// Find exchange value and call convert() to calculate the new price
+		if (shortNameCurrency2 != null){
 			for (Integer i = 0; i < currencies.size(); i++) {
 				if (currencies.get(i).getName() == currency1) {
 					exchangeValue = currencies.get(i).getExchangeValues().get(shortNameCurrency2);

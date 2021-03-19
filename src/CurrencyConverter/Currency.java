@@ -49,7 +49,7 @@ public class Currency {
 		String currency = this.name;
 		
 		switch (currency) {	
-			case "Indian Rupee":
+			case "Indian Rupee ₹":
 				this.exchangeValues.put("INR", 1.0000);
 				this.exchangeValues.put("USD", 0.0138);
 				this.exchangeValues.put("EUR", 0.0115);
@@ -57,7 +57,7 @@ public class Currency {
 				this.exchangeValues.put("CNY", 0.0895);
 				this.exchangeValues.put("JPY", 1.5005);
 				break;
-			case "US Dollar":
+			case "US Dollar $":
 				this.exchangeValues.put("INR", 72.6855);
 				this.exchangeValues.put("USD", 1.00);
 				this.exchangeValues.put("EUR", 0.838);
@@ -65,7 +65,7 @@ public class Currency {
 				this.exchangeValues.put("CNY", 6.506);
 				this.exchangeValues.put("JPY", 109.069);
 				break;
-			case "Euro":
+			case "Euro €":
 				this.exchangeValues.put("INR", 86.77);
 				this.exchangeValues.put("USD", 1.1934);
 				this.exchangeValues.put("EUR", 1.00);
@@ -73,7 +73,7 @@ public class Currency {
 				this.exchangeValues.put("CNY", 7.763);
 				this.exchangeValues.put("JPY", 132.57);
 				break;
-			case "British Pound":
+			case "British Pound £":
 				this.exchangeValues.put("INR", 101.052);
 				this.exchangeValues.put("USD", 1.3903);
 				this.exchangeValues.put("EUR", 1.165);
@@ -81,7 +81,7 @@ public class Currency {
 				this.exchangeValues.put("CNY", 9.0358);
 				this.exchangeValues.put("JPY", 151.63);
 				break;
-			case "Chinese Yuan Renminbi":
+			case "Chinese Yuan Renminbi ¥":
 				this.exchangeValues.put("INR", 11.1721);
 				this.exchangeValues.put("USD", 0.1537);
 				this.exchangeValues.put("EUR", 0.1288);
@@ -89,7 +89,7 @@ public class Currency {
 				this.exchangeValues.put("CNY", 1.00);
 				this.exchangeValues.put("JPY", 16.7636);
 				break;
-			case "Japanese Yen":
+			case "Japanese Yen JP¥":
 				this.exchangeValues.put("INR", 0.6664);
 				this.exchangeValues.put("USD", 0.0092);
 				this.exchangeValues.put("EUR", 0.0077);
@@ -104,13 +104,12 @@ public class Currency {
 	public static ArrayList<Currency> init() {
 		ArrayList<Currency> currencies = new ArrayList<Currency>();
 		
-		currencies.add( new Currency("Indian Rupee", "INR") );
-		currencies.add( new Currency("US Dollar", "USD") );
-		currencies.add( new Currency("Euro", "EUR") );
-		currencies.add( new Currency("British Pound", "GBP") );
-		currencies.add( new Currency("Chinese Yuan Renminbi", "CNY") );
-		currencies.add( new Currency("Japanese Yen", "JPY") );
-		
+		currencies.add( new Currency("Indian Rupee ₹", "INR") );
+		currencies.add( new Currency("US Dollar $", "USD") );
+		currencies.add( new Currency("Euro €", "EUR") );
+		currencies.add( new Currency("British Pound £", "GBP") );
+		currencies.add( new Currency("Chinese Yuan Renminbi ¥", "CNY") );
+		currencies.add( new Currency("Japanese Yen JP¥", "JPY") );
 		for (Integer i =0; i < currencies.size(); i++) {
 			currencies.get(i).defaultValues();
 		}		
